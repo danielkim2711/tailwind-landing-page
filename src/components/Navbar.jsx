@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import companyLogo from '../assets/images/logo.svg';
 
 const Navbar = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
+
   return (
     <nav className='relative container mx-auto p-6'>
       {/* Flex Container */}
@@ -39,8 +42,12 @@ const Navbar = () => {
 
         {/* Hamburger Icon */}
         <button
-          id='menu-btn'
-          className='block hamburger md:hidden focus:outline-none'
+          className={
+            toggleMenu
+              ? 'open block hamburger md:hidden focus:outline-none'
+              : 'block hamburger md:hidden focus:outline-none'
+          }
+          onClick={() => setToggleMenu(!toggleMenu)}
         >
           <span className='hamburger-top'></span>
           <span className='hamburger-middle'></span>
@@ -51,8 +58,11 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div className='md:hidden'>
         <div
-          id='menu'
-          className='absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'
+          className={
+            toggleMenu
+              ? 'absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'
+              : 'absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'
+          }
         >
           <Link to='#'>Pricing</Link>
           <Link to='#'>Product</Link>
